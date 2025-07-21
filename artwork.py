@@ -18,6 +18,11 @@
 This module provides an easy way to download artwork for a music album
 using the Discogs API.
 
+⚠️ **Important**: Discogs now requires an API token for most operations,
+including release metadata and image access. You must provide your
+token via the Authorization header using the format:
+    'Authorization': 'Discogs token=YOUR_TOKEN_HERE'
+
 Please take into account that requests to the Discogs API are throttled
 by the server to one per second per IP address. Because images are much
 more resource-intensive to serve, image requests are limited to 1000 
@@ -104,10 +109,11 @@ _url = 'https://github.com/vetl/discogs-artwork'
 _candidate_exts = ('jpeg', 'jpg', 'png')
 _Image = namedtuple('_Image', ('url', 'height', 'width'))
 
-_discogs_api_url = 'http://api.discogs.com/'
+_discogs_api_url = 'https://api.discogs.com/'
 _discogs_api_search = 'database/search'
 _discogs_api_headers = {
     'User-Agent': 'artwork.py/{ver} +{url}'.format(ver=_version, url=_url),
+    'Authorization': 'Discogs token=YOUR_TOKEN_HERE'
 }
 
 
